@@ -53,44 +53,21 @@
 
 <script>
 export default {
+    props: ['appearances', 'animeList', 'characterList'],
     data() {
         return {
-            appearances: [],
-            animeList: [],
-            characterList: [],
             newAppearance: { anime_id: '', character_id: '', role: '', is_main_character: false }
         }
     },
-    async mounted() {
-        const appearanceResponse = await fetch('http://localhost:8000/api/appearances/');
-        this.appearances = await appearanceResponse.json();
-
-        const animeResponse = await fetch('http://localhost:8000/api/anime/');
-        this.animeList = await animeResponse.json();
-
-        const characterResponse = await fetch('http://localhost:8000/api/characters/');
-        this.characterList = await characterResponse.json();
-    },
     methods: {
-        async addAppearance() {
-            const response = await fetch('http://localhost:8000/api/appearances/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.newAppearance)
-            });
-            const appearance = await response.json();
-            this.appearances.push(appearance);
+        addAppearance() {
+            this.$emit('add-appearance', this.newAppearance);
             this.newAppearance = { anime_id: '', character_id: '', role: '', is_main_character: false };
             const modal = bootstrap.Modal.getInstance(document.getElementById('addAppearanceModal'));
             modal.hide();
         },
-        async deleteAppearance(id) {
-            await fetch(`http://localhost:8000/api/appearances/`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
-            });
-            this.appearances = this.appearances.filter(appearance => appearance.id !== id);
+        deleteAppearance(id) {
+            this.$emit('delete-appearance', id);
         }
     }
 }

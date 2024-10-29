@@ -46,36 +46,21 @@
 
 <script>
 export default {
+    props: ['animes'],
     data() {
         return {
-            animes: [],
             newAnime: { title: '', description: '', release_date: '' }
         }
     },
-    async mounted() {
-        const response = await fetch('http://localhost:8000/api/anime/');
-        this.animes = await response.json();
-    },
     methods: {
-        async addAnime() {
-            const response = await fetch('http://localhost:8000/api/anime/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.newAnime)
-            });
-            const anime = await response.json();
-            this.animes.push(anime);
+        addAnime() {
+            this.$emit('add-anime', this.newAnime);
             this.newAnime = { title: '', description: '', release_date: '' };
             const modal = bootstrap.Modal.getInstance(document.getElementById('addAnimeModal'));
             modal.hide();
         },
-        async deleteAnime(id) {
-            await fetch(`http://localhost:8000/api/anime/`, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id })
-            });
-            this.animes = this.animes.filter(anime => anime.id !== id);
+        deleteAnime(id) {
+            this.$emit('delete-anime', id);
         }
     }
 }
