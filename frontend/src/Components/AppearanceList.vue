@@ -1,15 +1,35 @@
 <template>
     <div>
         <h3 class="mt-4">Appearances</h3>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" v-for="appearance in appearances" :key="appearance.id">
-                <div>
-                    <p>Anime: {{ appearance.anime__title }} - Character: {{ appearance.character__name }}</p>
-                    <p>Role: {{ appearance.role }} - Main Character: {{ appearance.is_main_character }}</p>
-                </div>
-                <button class="btn btn-danger btn-sm" @click="deleteAppearance(appearance.id)">Delete</button>
-            </li>
-        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Anime</th>
+                    <th>Character</th>
+                    <th>Role</th>
+                    <th>Main Character</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(appearance, index) in appearances" :key="appearance.id">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ appearance.anime__title }}</td>
+                    <td>{{ appearance.character__name }}</td>
+                    <td>{{ appearance.role }}</td>
+                    <td>{{ appearance.is_main_character ? 'Yes' : 'No' }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" @click="deleteAppearance(appearance.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addAppearanceModal">Add Appearance</button>
 
         <!-- Add Appearance Modal -->
@@ -95,3 +115,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.table {
+    width: 100%;
+    margin-top: 1rem;
+}
+.btn i {
+    margin-right: 0.25rem;
+}
+</style>

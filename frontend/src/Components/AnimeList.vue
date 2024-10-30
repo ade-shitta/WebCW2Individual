@@ -1,16 +1,33 @@
 <template>
     <div>
-        <h3 class="mt-4">Anime</h3>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" v-for="anime in animes" :key="anime.id">
-                <div>
-                    <h5>{{ anime.title }}</h5>
-                    <p>{{ anime.description }}</p>
-                    <p>Release Date: {{ anime.release_date }}</p>
-                </div>
-                <button class="btn btn-danger btn-sm" @click="deleteAnime(anime.id)">Delete</button>
-            </li>
-        </ul>
+        <h3 class="mt-4">Anime List</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(anime, index) in animes" :key="anime.id">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ anime.title }}</td>
+                    <td>{{ anime.description }}</td>
+                    <td>{{ anime.release_date }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" @click="deleteAnime(anime.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addAnimeModal">Add Anime</button>
 
         <!-- Add Anime Modal -->
@@ -80,3 +97,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.table {
+    width: 100%;
+    margin-top: 1rem;
+}
+.btn i {
+    margin-right: 0.25rem;
+}
+</style>

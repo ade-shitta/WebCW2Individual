@@ -1,6 +1,6 @@
-<!-- frontend/src/App.vue -->
 <template>
-    <div>
+    <div class="container">
+        <h1 class="text-center mt-4">Ade's Anime Records</h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#anime">Anime</a>
@@ -39,3 +39,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+</style>
