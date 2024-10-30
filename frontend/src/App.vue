@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import AnimeList from './components/AnimeList.vue';
-import CharacterList from './components/CharacterList.vue';
-import AppearanceList from './components/AppearanceList.vue';
+import AnimeList from './Components/AnimeList.vue';
+import CharacterList from './Components/CharacterList.vue';
+import AppearanceList from './Components/AppearanceList.vue';
 
 export default {
     components: {
