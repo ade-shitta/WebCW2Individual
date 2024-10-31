@@ -42,7 +42,7 @@ export default {
 
 <style scoped>
 .container {
-    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
 }
 </style>
